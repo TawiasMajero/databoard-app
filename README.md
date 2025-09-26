@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DataBoard App
 
-## Getting Started
+## Описание
 
-First, run the development server:
+Тестовое задание, демонстрирующее создание гибкого и масштабируемого интерфейса для управления различными типами данных (Products, Price Plans, Pages). Проект построен на принципах универсальности и переиспользуемости компонентов.
+
+### Ключевые особенности
+
+- **Универсальная таблица** — единый компонент для всех типов данных
+- **Гибкая конфигурация** — легко добавлять новые сущности без изменения кода
+- **Продвинутая фильтрация** — текстовый поиск, булевы значения, диапазоны дат
+- **Сортировка** — по любым полям, включая вложенные структуры
+- **Редактирование** — модальные окна с условной валидацией
+- **Type-safe** — полная типизация TypeScript
+- **Современный дизайн** — Tailwind CSS + Headless UI
+
+## Цель задания
+
+Создать интерфейс для отображения, сортировки и редактирования разных сущностей, используя универсальные переиспользуемые компоненты.
+
+## Технологический стек
+
+### Основные технологии
+
+- **React** — UI-библиотека
+- **TypeScript** — типизация
+- **Next.js 14** — фреймворк с App Router
+- **Tailwind CSS** — стилизация
+- **Zustand** — управление состоянием
+- **Headless UI** — доступные компоненты без стилей
+
+### Ограничения
+
+- Запрещены готовые UI-библиотеки таблиц (MUI, Antd, TanStack)
+- Запрещены внешние решения для фильтрации, сортировки, модалок
+
+## Быстрый старт
+
+# Клонируйте репозиторий
+
+git clone <repository-url>
+
+### Установка
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Клонируйте репозиторий
+git clone <repository-url>
+
+# Перейдите в директорию проекта
+cd databoard-app
+
+# Установите зависимости
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Запуск
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Запуск в режиме разработки
+npm run dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Открыть в браузере
+# http://localhost:3000
+```
 
-## Learn More
+### Сборка для продакшена
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Создать production build
+npm run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Запустить production сервер
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Структура проекта
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/                      # Next.js App Router
+│   ├── page.tsx             # Главная страница с навигацией
+│   ├── products/page.tsx    # Страница Products
+│   ├── price-plans/page.tsx # Страница Price Plans
+│   ├── pages/page.tsx       # Страница Pages
+│   └── layout.tsx           # Корневой layout
+│
+├── components/              # Переиспользуемые компоненты
+│   ├── Table/
+│   │   ├── Table.tsx        # Основной компонент таблицы
+│   │   ├── TableHeader.tsx  # Заголовок с сортировкой
+│   │   └── TableRow.tsx     # Строка таблицы (с React.memo)
+│   ├── Filters/
+│   │   └── FilterPanel.tsx  # Панель фильтров
+│   └── Modal/
+│       └── EditModal.tsx    # Модалка редактирования
+│
+├── lib/                     # Утилиты и бизнес-логика
+│   ├── store/
+│   │   └── dataStore.ts     # Zustand stores для каждой сущности
+│   ├── types/
+│   │   └── entities.ts      # TypeScript типы и конфигурации
+│   ├── utils/
+│   │   ├── sorting.ts       # Логика сортировки
+│   │   └── filtering.ts     # Логика фильтрации
+│   └── data/
+│       └── mockData.ts      # Тестовые данные
+│
+└── styles/
+    └── globals.css          # Глобальные стили
+```
