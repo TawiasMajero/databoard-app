@@ -19,12 +19,12 @@ export default function ProductsPage() {
       editable: true,
       filterable: true,
       filterType: "text",
-      editableCondition: (row) => row.active, // Условие
+      editableCondition: (row) => row.active,
     },
     {
       key: "options.size",
       label: "Size",
-      render: (value) => value || "N/A",
+      render: (value: unknown) => (value as string) || "N/A",
       sortable: true,
       editable: true,
       filterable: true,
@@ -33,7 +33,7 @@ export default function ProductsPage() {
     {
       key: "options.amount",
       label: "Amount",
-      render: (value) => value.toString(),
+      render: (value: unknown) => (value as number).toString(),
       sortable: true,
       editable: true,
     },
@@ -44,7 +44,6 @@ export default function ProductsPage() {
       editable: true,
       filterable: true,
       filterType: "boolean",
-      render: (value) => (value ? "✔" : "✘"),
     },
     {
       key: "createdAt",
@@ -53,7 +52,8 @@ export default function ProductsPage() {
       editable: true,
       filterable: true,
       filterType: "dateRange",
-      render: (value) => new Date(value).toLocaleDateString(),
+      render: (value: unknown) =>
+        new Date(value as string).toLocaleDateString(),
     },
     { key: "edit", label: "Edit" },
   ];

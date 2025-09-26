@@ -24,13 +24,37 @@ export const sortData = <T>(
   });
 };
 
-export const getNestedValue = (obj: any, key: string): any => {
-  return key.split(".").reduce((o, k) => (o ? o[k] : undefined), obj);
+export const getNestedValue = <T>(obj: T, key: string): unknown => {
+  let current: unknown = obj;
+  for (const k of key.split(".")) {
+    if (current && typeof current === "object" && k in current) {
+      current = (current as Record<string, unknown>)[k];
+    } else {
+      return undefined;
+    }
+  }
+  return current;
 };
 
-export const setNestedValue = (obj: any, key: string, value: any): any => {
+export const setNestedValue = <T>(
+  obj: T,
+  key: string,
+  value: unknown
+): void => {
+  let current: unknown = obj;
   const keys = key.split(".");
   const lastKey = keys.pop()!;
-  const lastObj = keys.reduce((o, k) => (o[k] = o[k] || {}), obj);
-  lastObj[lastKey] = value;
+  for (const k of keys) {
+    if (current && typeof current === "object") {
+      if (!(k in current)) {
+        (current as Record<string, unknown>)[k] = {};
+      }
+      current = (current as Record<string, unknown>)[k];
+    } else {
+      return; // Cannot set on non-object
+    }
+  }
+  if (current && typeof current === "object") {
+    (current as Record<string, unknown>)[lastKey] = value;
+  }
 };

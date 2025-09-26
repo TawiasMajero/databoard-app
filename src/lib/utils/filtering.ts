@@ -18,7 +18,7 @@ export const applyFilters = <T>(data: T[], filters: Filter[]): T[] => {
         return value === filter.value;
       }
       if (filter.type === "dateRange") {
-        const date = new Date(value);
+        const date = new Date(value as string | Date);
         const { from, to } = filter.value as { from: string; to: string };
         return (
           (!from || date >= new Date(from)) && (!to || date <= new Date(to))

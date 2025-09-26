@@ -31,7 +31,7 @@ const TableRowComponent = <T extends { id: number }>({
         const value = getNestedValue(row, column.key as string);
         return (
           <td key={column.key as string} className="border p-2">
-            {column.render ? column.render(value, row) : value}
+            {column.render ? column.render(value, row) : String(value ?? "N/A")}
           </td>
         );
       })}
@@ -39,6 +39,6 @@ const TableRowComponent = <T extends { id: number }>({
   );
 };
 
-const TableRow = React.memo(TableRowComponent) as typeof TableRowComponent;
+const TableRow = React.memo(TableRowComponent) as typeof TableRowComponent; // Оптимизация
 
 export default TableRow;

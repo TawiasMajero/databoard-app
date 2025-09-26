@@ -28,7 +28,6 @@ export default function PricePlansPage() {
       editable: true,
       filterable: true,
       filterType: "boolean",
-      render: (value) => (value ? "✔" : "✘"),
     },
     {
       key: "createdAt",
@@ -37,7 +36,8 @@ export default function PricePlansPage() {
       editable: true,
       filterable: true,
       filterType: "dateRange",
-      render: (value) => new Date(value).toLocaleDateString(),
+      render: (value: unknown) =>
+        new Date(value as string).toLocaleDateString(),
     },
     {
       key: "removedAt",
@@ -46,7 +46,8 @@ export default function PricePlansPage() {
       editable: true,
       filterable: true,
       filterType: "dateRange",
-      render: (value) => new Date(value).toLocaleDateString(),
+      render: (value: unknown) =>
+        new Date(value as string).toLocaleDateString(),
     },
     { key: "edit", label: "Edit" },
   ];

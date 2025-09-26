@@ -29,7 +29,7 @@ export type Entity = Page | Product | PricePlan;
 export interface ColumnConfig<T> {
   key: keyof T | string;
   label: string | React.JSX.Element;
-  render?: (value: any, row: T) => React.JSX.Element | string;
+  render?: (value: unknown, row: T) => React.JSX.Element | string;
   sortable?: boolean;
   editable?: boolean;
   filterable?: boolean;

@@ -25,7 +25,7 @@ const EditModal = <T extends { id: number }>({
     onClose();
   }, [formData, onSave, onClose]);
 
-  const handleChange = (key: string, value: any) => {
+  const handleChange = (key: string, value: unknown) => {
     const newData = { ...formData };
     setNestedValue(newData, key, value);
     setFormData(newData);
@@ -42,7 +42,7 @@ const EditModal = <T extends { id: number }>({
       return (
         <input
           type="checkbox"
-          checked={value}
+          checked={value as boolean}
           onChange={(e) => handleChange(column.key as string, e.target.checked)}
         />
       );
@@ -51,7 +51,7 @@ const EditModal = <T extends { id: number }>({
       return (
         <input
           type="date"
-          value={value.slice(0, 10)}
+          value={(value as string).slice(0, 10)} // Форматирование даты
           onChange={(e) => handleChange(column.key as string, e.target.value)}
         />
       );
@@ -59,7 +59,7 @@ const EditModal = <T extends { id: number }>({
     return (
       <input
         type="text"
-        value={value}
+        value={value as string}
         onChange={(e) => handleChange(column.key as string, e.target.value)}
         className="border p-1 w-full"
       />
